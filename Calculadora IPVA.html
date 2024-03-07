@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IPVA</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #3498db; /* azul */
+        }
+        
+        .container {
+            width: 300px;
+            height: auto;
+            background-color: #fff; /* branco */
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* preto */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        #valorVeiculo,
+        #mesesRestantes {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #3498db; /* azul */
+            border-radius: 5px;
+        }
+        
+        #calcularBtn {
+            background-color: #3498db; /* azul */
+            color: #fff; /* branco */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #3498db; /* azul */
+            color: #fff; /* branco */
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        #creditos {
+            margin-top: 10px;
+            font-size: 10px;
+            color: #555; /* cinza escuro */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de IPVA</h2>
+        <form id="ipvaForm">
+            <label for="valorVeiculo">Valor do Veículo (R$):</label>
+            <input type="number" id="valorVeiculo" required>
+            
+            <label for="mesesRestantes">Meses Restantes no Ano:</label>
+            <input type="number" id="mesesRestantes" required>
+            
+            <button id="calcularBtn" type="button" onclick="calcularIPVA()">Calcular</button>
+            
+            <div id="resultado"></div>
+            <div id="creditos">Desenvolvido por Marcus Buceles</div>
+        </form>
+    </div>
+
+    <script>
+        function calcularIPVA() {
+            var valorVeiculo = parseFloat(document.getElementById('valorVeiculo').value);
+            var mesesRestantes = parseInt(document.getElementById('mesesRestantes').value);
+            
+            var aliquota = valorVeiculo <= 150000 ? 2.5 : 3.0; // alíquota do IPVA
+            
+            var ipva = (valorVeiculo * (aliquota / 100) / 12) * mesesRestantes;
+            
+            document.getElementById('resultado').innerHTML = 'O valor do IPVA é: <span style="color: white;">R$ <strong>' + ipva.toFixed(2) + '</strong></span>';
+        }
+    </script>
+</body>
+</html>
